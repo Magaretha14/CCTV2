@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CCTV2</string>
+
+    <string-array name="programming_languages">
+        <item>Tugu Selamat Datang</item>
+        <item>Bunderan Siyono</item>
+        <item>Alun-Alun Wonosari</item>
+    </string-array>
+
+    <string-array name="kapanewon">
+        <item>Kapanewon Patuk</item>
+        <item>Kapanewon Playen</item>
+        <item>Kapanewon Wonosari</item>
+    </string-array>
+</resources>
