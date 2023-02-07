@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerview;
 
     String s1[], s2[];
-    int img[] = {R.drawable.tugu, R.drawable.bunderan_siyono, R.drawable.alun_wono};
+    int img[] = {R.drawable.tugu_welcome_gk, R.drawable.bunderan_siyono, R.drawable.alun_wono, R.drawable.bunderan_pln,
+            R.drawable.simpang4rsud, R.drawable.jalanbaronmulo, R.drawable.simpang4trowono, R.drawable.pantaibaron, R.drawable.pantaikukup};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerview = findViewById(R.id.recyclerView);
-        s1 = getResources().getStringArray(R.array.programming_languages);
+        s1 = getResources().getStringArray(R.array.areaCctv);
         s2 = getResources().getStringArray(R.array.kapanewon);
 
         cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img);

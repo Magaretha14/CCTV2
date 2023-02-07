@@ -1,6 +1,7 @@
 package com.example.cctv2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> {
@@ -37,6 +40,25 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
         holder.myText2.setText(data2[position]);
         holder.myImage.setImageResource(images[position]);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ViewCCTV.class);
+                intent.putExtra("data1", data1[position]);
+                intent.putExtra("data2", data2[position]);
+                //intent.putExtra("position",position);
+                context.startActivity(intent);
+            }
+        });
+
+        /*holder.myCardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ViewCCTV.class);
+                context.startActivity(intent);
+            }
+        });*/
+
     }
 
     @Override
@@ -48,6 +70,7 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
 
         TextView myText1, myText2;
         ImageView myImage;
+        CardView myCardview;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +78,7 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
             myText1 = itemView.findViewById(R.id.txAreacctv);
             myText2 = itemView.findViewById(R.id.txKapanewon);
             myImage = itemView.findViewById(R.id.imageView);
+            myCardview = itemView.findViewById(R.id.cvcardview);
         }
     }
 }
