@@ -57,7 +57,7 @@
     </RelativeLayout>
 
     <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/exoplayer"
+        android:id="@+id/exoplayercctv"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:foregroundGravity="center"

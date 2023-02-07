@@ -15,7 +15,7 @@ public class ViewCCTV extends AppCompatActivity {
     ExoPlayer exoPlayer;
     TextView area, kapanewon;
 
-    String data1, data2;
+    String data1, data2, videoUrl;
     int position = -1;
 
     @Override
@@ -28,20 +28,111 @@ public class ViewCCTV extends AppCompatActivity {
         getData();
         setData();
 
-        String videoUrl[];
-        videoUrl = getResources().getStringArray(R.array.linkVideo);
+        if (area.equals("Tugu Selamat Datang")){
+            videoUrl = "http://103.141.234.194:8080/live/tugu-selamat-datang-patuk.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Bunderan Siyono")){
+            videoUrl = "http://103.141.234.194:8080/live/bunderan-siyono.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Alun-Alun Wonosari")){
+            videoUrl = "http://103.141.234.194:8080/live/alun-alun-wonosari.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Bunderan PLN")){
+            videoUrl = "http://103.141.234.194:8080/live/bunderan-pln.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Simpang 4 RSUD")){
+            videoUrl = "http://103.141.234.194:8080/live/simpang-4-rsud.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Ngingrong Mulo")){
+            videoUrl = "http://103.141.234.194:8080/live/ngingrong-mulo.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Simpang 4 Trowono")){
+           videoUrl = "http://103.141.234.194:8080/live/simpang-4-trowono.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Pantai Baron")){
+            videoUrl = "http://103.141.234.194:8080/live/pantai-baron.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+        else if (area.equals("Pantai Kukup")){
+            videoUrl = "http://103.141.234.194:8080/live/pantai-kukup.flv";
+
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }
+
+        //String videoUrl[];
+        //videoUrl = getResources().getStringArray(R.array.linkVideo);
 
         //String videoUrl = "http://103.141.234.194:8080/live/bunderan-siyono.flv";
 
-
-
-        exoPlayer = new ExoPlayer.Builder(this).build();
-        playerView = findViewById(R.id.exoplayer);
-        playerView.setPlayer(exoPlayer);
-        MediaItem mediaItem = MediaItem.fromUri(String.valueOf(videoUrl));
-        exoPlayer.addMediaItem(mediaItem);
-        exoPlayer.prepare();
-        exoPlayer.setPlayWhenReady(true);
     }
 
     private void getData(){
