@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerview;
 
-    String s1[], s2[];
+    String s1[], s2[], link[];
     int img[] = {R.drawable.tugu_welcome_gk, R.drawable.bunderan_siyono, R.drawable.alun_wono, R.drawable.bunderan_pln,
             R.drawable.simpang4rsud, R.drawable.jalanbaronmulo, R.drawable.simpang4trowono, R.drawable.pantaibaron, R.drawable.pantaikukup};
 
@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerview = findViewById(R.id.recyclerView);
         s1 = getResources().getStringArray(R.array.areaCctv);
         s2 = getResources().getStringArray(R.array.kapanewon);
+        link = getResources().getStringArray(R.array.linkVideo);
 
-        cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img);
+        cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img, link);
         recyclerview.setAdapter(cctvadap);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
     }

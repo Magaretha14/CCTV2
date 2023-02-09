@@ -2,21 +2,35 @@ package com.example.cctv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
+import android.media.MediaDataSource;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewCCTV extends AppCompatActivity {
     PlayerView playerView;
     ExoPlayer exoPlayer;
     TextView area, kapanewon;
 
-    String data1, data2, videoUrl;
-    int position = -1;
+    String data1;
+    String data2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,113 +39,40 @@ public class ViewCCTV extends AppCompatActivity {
 
         area = findViewById(R.id.textView);
         kapanewon = findViewById(R.id.textView2);
+        playerView = findViewById(R.id.exoplayercctv);
         getData();
         setData();
 
-        if (area.equals("Tugu Selamat Datang")){
-            videoUrl = "http://103.141.234.194:8080/live/tugu-selamat-datang-patuk.flv";
+        String[] videoUrl = getResources().getStringArray(R.array.linkVideo);
 
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Bunderan Siyono")){
-            videoUrl = "http://103.141.234.194:8080/live/bunderan-siyono.flv";
+        // Attach player to the view
+        playerView.setPlayer(exoPlayer);
 
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Alun-Alun Wonosari")){
-            videoUrl = "http://103.141.234.194:8080/live/alun-alun-wonosari.flv";
+        // Produces DataSource instances through which media data is loaded
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
+                Util.getUserAgent(this, "exoplayer"));
 
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Bunderan PLN")){
-            videoUrl = "http://103.141.234.194:8080/live/bunderan-pln.flv";
+        MediaSource[] mediaSources = new MediaSource[videoUrl.length];
 
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Simpang 4 RSUD")){
-            videoUrl = "http://103.141.234.194:8080/live/simpang-4-rsud.flv";
-
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Ngingrong Mulo")){
-            videoUrl = "http://103.141.234.194:8080/live/ngingrong-mulo.flv";
-
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Simpang 4 Trowono")){
-           videoUrl = "http://103.141.234.194:8080/live/simpang-4-trowono.flv";
-
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Pantai Baron")){
-            videoUrl = "http://103.141.234.194:8080/live/pantai-baron.flv";
-
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
-        }
-        else if (area.equals("Pantai Kukup")){
-            videoUrl = "http://103.141.234.194:8080/live/pantai-kukup.flv";
-
-            exoPlayer = new ExoPlayer.Builder(this).build();
-            playerView = findViewById(R.id.exoplayercctv);
-            playerView.setPlayer(exoPlayer);
-            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
-            exoPlayer.addMediaItem(mediaItem);
-            exoPlayer.prepare();
-            exoPlayer.setPlayWhenReady(true);
+        for (int i = 0; i < videoUrl.length; i++) {
+            // This is the MediaSource representing each video
+            mediaSources[i] = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                    .createMediaSource(MediaItem.fromUri(Uri.parse(videoUrl[i])));
         }
 
-        //String videoUrl[];
-        //videoUrl = getResources().getStringArray(R.array.linkVideo);
+        // Concatenates the media sources into a single playback sequence
+        MediaSource videoSource = new ConcatenatingMediaSource(mediaSources);
 
-        //String videoUrl = "http://103.141.234.194:8080/live/bunderan-siyono.flv";
+        // Prepare the player with the source
+        exoPlayer.prepare(videoSource);
+        //exoPlayer.setPlayWhenReady(true);
+
+        /*exoPlayer = new ExoPlayer.Builder(this).build();
+        playerView.setPlayer(exoPlayer);
+        MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+        exoPlayer.addMediaItem(mediaItem);
+        exoPlayer.prepare();
+        exoPlayer.setPlayWhenReady(true);*/
 
     }
 
@@ -139,6 +80,8 @@ public class ViewCCTV extends AppCompatActivity {
         if(getIntent().hasExtra("data1") && getIntent().hasExtra("data2")){
             data1 = getIntent().getStringExtra("data1");
             data2 = getIntent().getStringExtra("data2");
+            //videoUrl = getIntent().getStringExtra("videoUrl");
+
         }else{
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }
@@ -146,5 +89,25 @@ public class ViewCCTV extends AppCompatActivity {
     private void setData(){
         area.setText(data1);
         kapanewon.setText(data2);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        playerView.onResume();
+        exoPlayer.setPlayWhenReady(true);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        playerView.onPause();
+        exoPlayer.setPlayWhenReady(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        exoPlayer.release();
     }
 }
