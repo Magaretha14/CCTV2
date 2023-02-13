@@ -24,7 +24,7 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
         data1 = s1;
         data2 = s2;
         images = img;
-        videoUrl = link;
+        //videoUrl = link;
 
     }
     @NonNull
@@ -47,8 +47,8 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
                 Intent intent = new Intent(context, ViewCCTV.class);
                 intent.putExtra("data1", data1[position]);
                 intent.putExtra("data2", data2[position]);
-                intent.putExtra("videoUrl", videoUrl[position]);
-                intent.putExtra("position",position);
+                //intent.putExtra("videoUrl", videoUrl[position]);
+                //intent.putExtra("position",position);
                 context.startActivity(intent);
             }
         });

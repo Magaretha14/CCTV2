@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerview = findViewById(R.id.recyclerView);
         s1 = getResources().getStringArray(R.array.areaCctv);
         s2 = getResources().getStringArray(R.array.kapanewon);
-        link = getResources().getStringArray(R.array.linkVideo);
+        //link = getResources().getStringArray(R.array.linkVideo);
 
         cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img, link);
         recyclerview.setAdapter(cctvadap);

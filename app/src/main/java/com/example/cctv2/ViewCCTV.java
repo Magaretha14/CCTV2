@@ -2,6 +2,7 @@ package com.example.cctv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.media.MediaDataSource;
 import android.net.Uri;
@@ -11,10 +12,12 @@ import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -30,6 +33,7 @@ public class ViewCCTV extends AppCompatActivity {
 
     String data1;
     String data2;
+    Context context;
 
 
     @Override
@@ -43,29 +47,30 @@ public class ViewCCTV extends AppCompatActivity {
         getData();
         setData();
 
-        String[] videoUrl = getResources().getStringArray(R.array.linkVideo);
+        //String[] videoUrl = getResources().getStringArray(R.array.linkVideo);
 
-        // Attach player to the view
-        playerView.setPlayer(exoPlayer);
+        // Create a list of media items
+        List<MediaItem> mediaItems = new ArrayList<>();
+        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/tugu-selamat-datang-patuk.flv").build());
+        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/bunderan-siyono.flv").build());
+        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/alun-alun-wonosari.flv").build());
 
-        // Produces DataSource instances through which media data is loaded
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
-                Util.getUserAgent(this, "exoplayer"));
+// Create an instance of ExoPlayer
+        ExoPlayer exoPlayer = new ExoPlayer.Builder(context).build();
 
-        MediaSource[] mediaSources = new MediaSource[videoUrl.length];
+// Create a PlayerControl instance to control the player
+        //PlayerControl playerControl = new PlayerControl(exoPlayer);
 
-        for (int i = 0; i < videoUrl.length; i++) {
-            // This is the MediaSource representing each video
-            mediaSources[i] = new ProgressiveMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(MediaItem.fromUri(Uri.parse(videoUrl[i])));
-        }
+        PlayerControlView playerControlView = new PlayerControlView(context);
 
-        // Concatenates the media sources into a single playback sequence
-        MediaSource videoSource = new ConcatenatingMediaSource(mediaSources);
+// Add the media items to the player
+        playerView.setPlayer((Player) playerControlView);
+        exoPlayer.addMediaItems(mediaItems);
 
-        // Prepare the player with the source
-        exoPlayer.prepare(videoSource);
-        //exoPlayer.setPlayWhenReady(true);
+// Start playing the first media item
+        exoPlayer.prepare();
+        exoPlayer.setPlayWhenReady(true);
+
 
         /*exoPlayer = new ExoPlayer.Builder(this).build();
         playerView.setPlayer(exoPlayer);
@@ -89,25 +94,5 @@ public class ViewCCTV extends AppCompatActivity {
     private void setData(){
         area.setText(data1);
         kapanewon.setText(data2);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        playerView.onResume();
-        exoPlayer.setPlayWhenReady(true);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        playerView.onPause();
-        exoPlayer.setPlayWhenReady(false);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        exoPlayer.release();
     }
 }
