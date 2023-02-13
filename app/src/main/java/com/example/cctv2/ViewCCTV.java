@@ -43,33 +43,65 @@ public class ViewCCTV extends AppCompatActivity {
 
         area = findViewById(R.id.textView);
         kapanewon = findViewById(R.id.textView2);
-        playerView = findViewById(R.id.exoplayercctv);
+        //playerView = findViewById(R.id.exoplayercctv);
         getData();
         setData();
 
-        //String[] videoUrl = getResources().getStringArray(R.array.linkVideo);
+        if(data1.equals("Tugu Selamat Datang") && data2.equals("Kapanewon Patuk")){
+            String videoUrl = "http://103.141.234.194:8080/live/tugu-selamat-datang-patuk.flv";
 
-        // Create a list of media items
-        List<MediaItem> mediaItems = new ArrayList<>();
-        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/tugu-selamat-datang-patuk.flv").build());
-        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/bunderan-siyono.flv").build());
-        mediaItems.add(new MediaItem.Builder().setUri("http://103.141.234.194:8080/live/alun-alun-wonosari.flv").build());
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        }else if (data1.equals("Bunderan Siyono") && data2.equals("Kapanewon Playen")){
+            String videoUrl = "http://103.141.234.194:8080/live/bunderan-siyono.flv";
 
-// Create an instance of ExoPlayer
-        ExoPlayer exoPlayer = new ExoPlayer.Builder(context).build();
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
+        } else if (data1.equals("Alun-Alun Wonosari") && data2.equals("Kapanewon Wonosari")){
+            String videoUrl = "http://103.141.234.194:8080/live/alun-alun-wonosari.flv";
 
-// Create a PlayerControl instance to control the player
-        //PlayerControl playerControl = new PlayerControl(exoPlayer);
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
 
-        PlayerControlView playerControlView = new PlayerControlView(context);
+        }else if (data1.equals("Bunderan PLN") && data2.equals("Kapanewon Wonosari")){
+            String videoUrl = "http://103.141.234.194:8080/live/bunderan-pln.flv";
 
-// Add the media items to the player
-        playerView.setPlayer((Player) playerControlView);
-        exoPlayer.addMediaItems(mediaItems);
+            exoPlayer = new ExoPlayer.Builder(this).build();
+            playerView = findViewById(R.id.exoplayercctv);
+            playerView.setPlayer(exoPlayer);
+            MediaItem mediaItem = MediaItem.fromUri(videoUrl);
+            exoPlayer.addMediaItem(mediaItem);
+            exoPlayer.prepare();
+            exoPlayer.setPlayWhenReady(true);
 
-// Start playing the first media item
-        exoPlayer.prepare();
-        exoPlayer.setPlayWhenReady(true);
+        }else if (data1.equals("Simpang 4 RSUD") && data2.equals("Kapanewon Wonosari")){
+
+        }else if (data1.equals("Ngingrong Mulo") && data2.equals("Kapanewon Wonosari")){
+
+        }else if (data1.equals("Simpang 4 Trowono") && data2.equals("Kapanewon Paliyan")){
+
+        }else if (data1.equals("Pantai Baron") && data2.equals("Kapanewon Tanjungsari")){
+
+        }else if (data1.equals("Pantai Kukup") && data2.equals("Kapanewon Tanjungsari")){
+
+        }else {
+            Toast.makeText(ViewCCTV.this,"tidak ada cctv",Toast.LENGTH_LONG).show();
+        }
 
 
         /*exoPlayer = new ExoPlayer.Builder(this).build();
