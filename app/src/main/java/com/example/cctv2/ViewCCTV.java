@@ -1,14 +1,22 @@
 package com.example.cctv2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerView;
 
 
@@ -16,6 +24,8 @@ public class ViewCCTV extends AppCompatActivity {
     PlayerView playerView;
     ExoPlayer exoPlayer;
     TextView area, kapanewon;
+    ImageView fullscreenButton;
+    boolean fullscreen = false;
 
     String data1;
     String data2;
@@ -30,9 +40,10 @@ public class ViewCCTV extends AppCompatActivity {
         area = findViewById(R.id.textView);
         kapanewon = findViewById(R.id.textView2);
         playerView = findViewById(R.id.exoplayercctv);
-        //playerView = findViewById(R.id.exoplayercctv);
+        fullscreenButton = playerView.findViewById(R.id.exo_fullscreen_icon);
         getData();
         setData();
+
 
         if(data1.equals("Tugu Selamat Datang") && data2.equals("Kapanewon Patuk")){
 
@@ -80,10 +91,54 @@ public class ViewCCTV extends AppCompatActivity {
 
         exoPlayer = new ExoPlayer.Builder(this).build();
         playerView.setPlayer(exoPlayer);
+        playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT);
         MediaItem mediaItem = MediaItem.fromUri(videoUrl);
         exoPlayer.addMediaItem(mediaItem);
         exoPlayer.prepare();
         exoPlayer.setPlayWhenReady(true);
+
+        fullscreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(fullscreen) {
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(ViewCCTV.this, R.drawable.ic_baseline_fullscreen_24));
+
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
+                    if(getSupportActionBar() != null){
+                        getSupportActionBar().show();
+                    }
+
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) playerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = (int) ( 200 * getApplicationContext().getResources().getDisplayMetrics().density);
+                    playerView.setLayoutParams(params);
+
+                    fullscreen = false;
+                }else{
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(ViewCCTV.this, R.drawable.ic_fullscreen_exit));
+
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                            |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+                    if(getSupportActionBar() != null){
+                        getSupportActionBar().hide();
+                    }
+
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) playerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = params.MATCH_PARENT;
+                    playerView.setLayoutParams(params);
+
+                    fullscreen = true;
+                }
+            }
+        });
 
     }
 
