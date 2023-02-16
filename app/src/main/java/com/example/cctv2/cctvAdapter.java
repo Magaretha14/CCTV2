@@ -1,5 +1,6 @@
 package com.example.cctv2;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,16 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> {
 
-    String data1[], data2[], videoUrl[];
+    String data1[], data2[];
     int images[];
     Context context;
 
-    public cctvAdapter(Context ct, String[] s1, String[] s2, int[] img, String[] link){
+    public cctvAdapter(Context ct, String[] s1, String[] s2, int[] img){
         context = ct;
         data1 = s1;
         data2 = s2;
         images = img;
-        //videoUrl = link;
 
     }
     @NonNull
@@ -36,30 +36,20 @@ public class cctvAdapter extends RecyclerView.Adapter<cctvAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.myText1.setText(data1[position]);
         holder.myText2.setText(data2[position]);
         holder.myImage.setImageResource(images[position]);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.myCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ViewCCTV.class);
                 intent.putExtra("data1", data1[position]);
                 intent.putExtra("data2", data2[position]);
-                //intent.putExtra("videoUrl", videoUrl[position]);
-                //intent.putExtra("position",position);
                 context.startActivity(intent);
             }
         });
-
-        /*holder.myCardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ViewCCTV.class);
-                context.startActivity(intent);
-            }
-        });*/
 
     }
 

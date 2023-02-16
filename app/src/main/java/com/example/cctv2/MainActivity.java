@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerview;
     TextView tvIni;
 
-    String s1[], s2[], link[];
+    String s1[], s2[];
     int img[] = {R.drawable.tugu_welcome_gk, R.drawable.bunderan_siyono, R.drawable.alun_wono, R.drawable.bunderan_pln,
             R.drawable.simpang4rsud, R.drawable.jalanbaronmulo, R.drawable.simpanggading,R.drawable.manthousplayen, R.drawable.pantaibaron, R.drawable.pantaikukup};
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         s2 = getResources().getStringArray(R.array.kapanewon);
         //link = getResources().getStringArray(R.array.linkVideo);
 
-        cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img, link);
+        cctvAdapter cctvadap = new cctvAdapter(this, s1,s2,img);
         recyclerview.setAdapter(cctvadap);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
 
